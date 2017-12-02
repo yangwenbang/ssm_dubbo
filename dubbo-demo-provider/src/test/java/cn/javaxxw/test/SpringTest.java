@@ -21,7 +21,7 @@ import cn.javaxxw.utils.MD5Util;
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@ContextConfiguration(locations="classpath:spring/spring-context.xml")
 public class SpringTest {
-
+	//测试代码
    /* @Autowired
     private UserService userService;
 
