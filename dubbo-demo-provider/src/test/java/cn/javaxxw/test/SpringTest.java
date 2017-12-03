@@ -18,18 +18,18 @@ import cn.javaxxw.utils.MD5Util;
  * @desc
  * @create 2017-11-29 15:54
  **/
-//@RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(locations="classpath:spring/spring-context.xml")
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations="classpath:spring/spring-context.xml")
 public class SpringTest {
    //测试拉取代码
-   /* @Autowired
+    @Autowired
     private UserService userService;
 
     @Test
     public void testAddUser(){
-        User user = userService.addUser("tuyong", MD5Util.MD5("123456"),"Trazen");
-        System.err.println(user.toString());
-    }*/
+        List<User> user = userService.findAllUsers();
+        System.out.println(user);
+    }
 
 
 }
