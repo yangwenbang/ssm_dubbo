@@ -1,16 +1,18 @@
 package cn.javaxxw.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import cn.javaxxw.model.User;
 import cn.javaxxw.service.UserService;
-import cn.javaxxw.utils.RedisCacheUtil;
 
 /**
  * @author tuyong
@@ -32,9 +34,11 @@ public class UserController {
     }
     
     @GetMapping("findUser")
-    private List<User> findUser(){
+    public ModelAndView findUser(){
     	List<User> list = userService.findAllUsers();
-    	return list;
+    	Map<String, List> map = new HashMap<>();
+    	map.put("user", list);
+    	return new ModelAndView("index",map);
     }
 
 }
