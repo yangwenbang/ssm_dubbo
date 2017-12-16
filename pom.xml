@@ -13,7 +13,7 @@
         <module>dubbo-demo-provider</module>
         <module>dubbo-demo-consumer</module>
     </modules>
-
+	
     <!-- 集中定义依赖版本号 -->
     <properties>
         <!--jdk版本 项目编码 -->
@@ -61,7 +61,6 @@
                 <version>${junit.version}</version>
                 <scope>test</scope>
             </dependency>
-
             <!-- spring核心包 -->
             <!-- springframe start -->
             <dependency>
