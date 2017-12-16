@@ -16,6 +16,27 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
         </property>
     </bean>
     
+     <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">  
+    </bean>
+    
+    <!-- jedis shard1信息配置 -->  
+    <bean id="jedis.shardInfoCache1" class="redis.clients.jedis.JedisShardInfo">  
+        <constructor-arg index="0" value="${redis.jedis.shardInfoCache1.host}" />  
+        <constructor-arg index="1" type="int" value="${redis.jedis.shardInfoCache1.port}" />  
+    </bean> 
+    
+    <!-- jedis shard pool配置 -->  
+    <bean id="shardedJedisPoolCache" class="redis.clients.jedis.ShardedJedisPool">  
+        <constructor-arg index="0" ref="jedisPoolConfig" />  
+        <constructor-arg index="1">  
+            <list>  
+                <ref bean="jedis.shardInfoCache1" />  
+            </list>  
+        </constructor-arg>  
+    </bean>  
+	<bean id="redisUtil" class="cn.javaxxw.utils.RedisUtil">  
+        <property name="shardedJedisPool" ref="shardedJedisPoolCache" />  
+    </bean>
     <import resource="classpath:spring/spring-consumer.xml" />
     
 	<context:component-scan base-package="cn.javaxxw.service" />
