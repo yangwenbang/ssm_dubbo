@@ -28,11 +28,6 @@ public class UserController {
     @PostMapping("register")
     public Object register(String userName,String password,String nickName){
         User user = userService.addUser(userName,password,nickName);
-        RedisCacheUtil.addCache("user", user);
-        if (RedisCacheUtil.isExistCache("user")) {
-			User user1 = (User)RedisCacheUtil.getObject("user");
-			System.out.println(user1.toString());
-		}
         return user.toString();
     }
     
