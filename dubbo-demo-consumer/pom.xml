@@ -111,6 +111,11 @@
             <artifactId>json-lib</artifactId>
             <classifier>jdk15</classifier>
         </dependency>
+        <dependency>
+		    <groupId>redis.clients</groupId>
+		    <artifactId>jedis</artifactId>
+		    <version>2.7.2</version>
+		</dependency>
     </dependencies>
 
     <build>

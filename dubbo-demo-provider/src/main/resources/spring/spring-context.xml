@@ -15,7 +15,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
             </list>
         </property>
     </bean>
-
+    
 	<context:component-scan base-package="cn.javaxxw.*" />
 	
     <import resource="classpath:spring/spring-provider.xml" />

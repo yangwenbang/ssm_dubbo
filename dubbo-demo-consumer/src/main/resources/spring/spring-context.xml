@@ -15,6 +15,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
             </list>
         </property>
     </bean>
+    <context:component-scan base-package="cn.javaxxw.*" />
     
      <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">  
     </bean>
@@ -37,8 +38,11 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
 	<bean id="redisUtil" class="cn.javaxxw.utils.RedisUtil">  
         <property name="shardedJedisPool" ref="shardedJedisPoolCache" />  
     </bean>
+    <bean id="redisCacheUtil" class="cn.javaxxw.utils.RedisCacheUtil">
+    	<property name="redisUtil">
+			<ref bean="redisUtil" />
+		</property>
+    </bean>
     <import resource="classpath:spring/spring-consumer.xml" />
-    
-	<context:component-scan base-package="cn.javaxxw.service" />
 
 </beans>

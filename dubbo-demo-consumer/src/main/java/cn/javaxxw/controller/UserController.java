@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cn.javaxxw.model.User;
 import cn.javaxxw.service.UserService;
+import cn.javaxxw.utils.RedisCacheUtil;
 
 /**
  * @author tuyong
@@ -27,6 +28,11 @@ public class UserController {
     @PostMapping("register")
     public Object register(String userName,String password,String nickName){
         User user = userService.addUser(userName,password,nickName);
+        RedisCacheUtil.addCache("user", user);
+        if (RedisCacheUtil.isExistCache("user")) {
+			User user1 = (User)RedisCacheUtil.getObject("user");
+			System.out.println(user1.toString());
+		}
         return user.toString();
     }
     
