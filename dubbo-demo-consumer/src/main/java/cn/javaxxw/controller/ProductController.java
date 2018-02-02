@@ -32,7 +32,7 @@ public class ProductController {
         Product product = productService.addProduct(pname,price);
         return product.toString();
     }
-    //xxx123
+    //xxx1234
     @GetMapping("findProduct")
     public ModelAndView findProduct(){
     	List<Product> list = productService.findAllProducts();
