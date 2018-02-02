@@ -18,7 +18,7 @@ import cn.javaxxw.utils.MD5Util;
  * @desc
  * @create 2017-11-29 15:54
  **/
-@RunWith(SpringJUnit4ClassRunner.class)
+/*@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations="classpath:spring/spring-context.xml")
 public class SpringTest {
    
@@ -33,3 +33,4 @@ public class SpringTest {
 
 
 }
+*/
