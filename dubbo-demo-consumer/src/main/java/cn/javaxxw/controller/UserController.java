@@ -4,12 +4,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.alibaba.dubbo.common.utils.LogUtil;
 
 import cn.javaxxw.model.User;
 import cn.javaxxw.service.UserService;
@@ -23,7 +26,7 @@ import cn.javaxxw.service.UserService;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-
+	private static Logger logger  =  Logger.getLogger(UserController.class );
     @Autowired
     private UserService userService;
 
