@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+	<!--
+		配置调度程序quartz框架采用的配置方式为使用MethodInvokingJobDetailFactoryBean
+		任务类可以不实现Job接口通过targetMethod指定调用方法
+	-->
+
+	<!-- 配置方法说明 -->
+	<!-- 1、配置方法实现类 -->
+	<!-- 2、制定需要调度执行的方法名 -->
+	<!-- 3、配置触发调度器 -->
+	<!-- 4、把该触发器添加到调度工厂中 -->
+   
+    <bean id="testJob" class="cn.javaxxw.job.TestJob"></bean>
+	<bean id="testJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+        <property name="targetObject">
+            <ref bean="testJob" />
+        </property>
+        <property name="targetMethod">
+            <value>excute</value>
+        </property>
+    </bean>
+    <bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">  
+        <property name="jobDetail" ref="testJobDetail"></property>  
+        <property name="cronExpression" value="0 0 8 * * ?"></property>
+    </bean>
+    
+	<!--总调度工厂 -->
+	<!-- 将调度和触发器整合 -->
+    <bean id="SpringJobSchedulerFactory" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">  
+    	<property name="jobDetails">  
+            <list>
+                <ref bean="testJobDetail" />  
+            </list>  
+        </property>  
+        <property name="triggers">  
+            <list>  
+	             <ref bean="cronTrigger" />
+            </list>  
+        </property>  
+    </bean>  
+	
+</beans>

@@ -5,7 +5,7 @@ xmlns:context="http://www.springframework.org/schema/context"
 xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 	http://www.springframework.org/schema/context
-	http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 	
 	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="ignoreUnresolvablePlaceholders" value="true" />
@@ -17,16 +17,18 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
     </bean>
     <context:component-scan base-package="cn.javaxxw.*" />
     
-     <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">  
-    </bean>
+    <import resource="classpath:spring/spring-consumer.xml" />
+	<import resource="classpath:spring/spring-job.xml" />
+	
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig"></bean>
     
-    <!-- jedis shard1信息配置 -->  
+	<!-- jedis shard1信息配置   -->
     <bean id="jedis.shardInfoCache1" class="redis.clients.jedis.JedisShardInfo">  
         <constructor-arg index="0" value="${redis.jedis.shardInfoCache1.host}" />  
         <constructor-arg index="1" type="int" value="${redis.jedis.shardInfoCache1.port}" />  
     </bean> 
     
-    <!-- jedis shard pool配置 -->  
+    <!-- jedis shard pool配置   -->
     <bean id="shardedJedisPoolCache" class="redis.clients.jedis.ShardedJedisPool">  
         <constructor-arg index="0" ref="jedisPoolConfig" />  
         <constructor-arg index="1">  
@@ -36,13 +38,13 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
         </constructor-arg>  
     </bean>  
 	<bean id="redisUtil" class="cn.javaxxw.utils.RedisUtil">  
-        <property name="shardedJedisPool" ref="shardedJedisPoolCache" />  
+        <property name="shardedJedisPool">  
+        	<ref bean="shardedJedisPoolCache" />
+        </property>
     </bean>
     <bean id="redisCacheUtil" class="cn.javaxxw.utils.RedisCacheUtil">
     	<property name="redisUtil">
 			<ref bean="redisUtil" />
 		</property>
     </bean>
-    <import resource="classpath:spring/spring-consumer.xml" />
-
 </beans>
