@@ -114,18 +114,18 @@
         </dependency>
         
     </dependencies>
-	<!-- <build>
+	<build>
         <plugins>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
-                    <appendAssemblyId>false</appendAssemblyId>
+                    <!-- <appendAssemblyId>false</appendAssemblyId> -->
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            此处指定main方法入口的class
+                            	<!-- 此处指定main方法入口的class -->
                             <mainClass>cn.javaxxw.DubboProvider</mainClass>
                         </manifest>
                     </archive>
@@ -141,7 +141,7 @@
                 </executions>
             </plugin>
         </plugins>
-    </build> -->
+    </build>
 
 
 
