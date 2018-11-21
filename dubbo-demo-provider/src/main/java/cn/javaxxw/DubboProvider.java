@@ -12,7 +12,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  **/
 public class DubboProvider {
 
-    /*private static final Log log = LogFactory.getLog(DubboProvider.class);
+   private static final Log log = LogFactory.getLog(DubboProvider.class);
 
     @SuppressWarnings("resource")
 	public static void main(String[] args) {
@@ -31,5 +31,5 @@ public class DubboProvider {
                 }
             }
         }
-    }*/
+    }
 }

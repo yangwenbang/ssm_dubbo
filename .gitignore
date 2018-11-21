@@ -5,3 +5,5 @@
 .settings 
 *.jar
 *.war
+.metadata
+.gitignore
