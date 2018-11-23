@@ -6,7 +6,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	hello,world!
+	hello,provider!
 	<img alt="" src="/static/img/index.jpg">
 </body>
 </html>
