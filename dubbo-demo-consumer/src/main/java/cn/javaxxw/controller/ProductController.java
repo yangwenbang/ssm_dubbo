@@ -15,7 +15,7 @@ import cn.javaxxw.model.Product;
 import cn.javaxxw.service.ProductService;
 
 /**
- * @author tuyong
+ * @author 杨文帮
  * @version 1.0
  * @desc
  * @create 2017-11-29 15:38
