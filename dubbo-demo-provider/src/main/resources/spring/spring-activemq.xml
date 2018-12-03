@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:amq="http://activemq.apache.org/schema/core"
+      xmlns:jms="http://www.springframework.org/schema/jms"
+      xmlns:context="http://www.springframework.org/schema/context"
+      xmlns:mvc="http://www.springframework.org/schema/mvc"
+      xsi:schemaLocation="
+         http://www.springframework.org/schema/beans     
+         http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+         http://www.springframework.org/schema/context
+       	 http://www.springframework.org/schema/context/spring-context-4.0.xsd
+         http://www.springframework.org/schema/mvc
+         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+         http://www.springframework.org/schema/jms
+        http://www.springframework.org/schema/jms/spring-jms-4.0.xsd
+        http://activemq.apache.org/schema/core
+        http://activemq.apache.org/schema/core/activemq-core-5.15.8.xsd"
+        >
+    
+    <!-- <amq:connectionFactory id="amqConnectionFactory" 
+         brokerURL="tcp://127.0.0.1:61616" 
+         userName="admin" 
+        password="admin" /> -->
+     
+   	<bean id="targetConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+	   <property name="brokerURL" value="${activemq.host}" />
+	</bean>
+	
+	<bean id="pooledConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory">
+	   <property name="connectionFactory" ref="targetConnectionFactory" />
+	   <property name="maxConnections" value="10" />
+	</bean>
+	
+	<bean id="connectionFactory"
+	   class="org.springframework.jms.connection.SingleConnectionFactory">
+	   <property name="targetConnectionFactory" ref="pooledConnectionFactory" />
+	</bean>
+	
+	<!--这个是队列目的地，点对点的 -->
+	<bean id="queueDestination" class="org.apache.activemq.command.ActiveMQQueue">
+	   <constructor-arg>
+	      <value>queue1</value>
+	   </constructor-arg>
+	</bean>
+	<!--这个是主题目的地，一对多的
+	<bean id="topicDestination" class="org.apache.activemq.command.ActiveMQTopic">
+	   <constructor-arg value="topic" />
+	</bean>
+	-->
+	<!-- 定义监听消息队列（Queue），queue2-->
+	<bean id="messageQueueDestination" class="org.apache.activemq.command.ActiveMQQueue">
+	   <!-- 设置消息队列的名字 -->
+	   <constructor-arg>
+	      <value>queue2</value>
+	   </constructor-arg>
+	</bean>
+	<!-- 配置消息队列监听者（Queue），代码下面给出，只有一个onMessage方法 -->
+	<!-- <bean id="queueMessageListener" class="com.jeeplus.modules.jms.listener.QueueMessageListener" /> -->
+	
+	<!-- 消息监听容器（Queue），配置连接工厂，监听的队列是queue2，监听器是上面定义的监听器 ，系统里直接使用监听 -->
+	<!-- <bean id="jmsContainer"
+	     class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+	   <property name="connectionFactory" ref="connectionFactory" />
+	   <property name="destination" ref="messageQueueDestination" />
+	   <property name="messageListener" ref="queueMessageListener" />
+	</bean> -->
+	
+	
+	<!-- Spring提供的JMS工具类，它可以进行消息发送、接收等 -->
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+	   <!-- 这个connectionFactory对应的是我们定义的Spring提供的那个ConnectionFactory对象 -->
+	   <property name="connectionFactory" ref="connectionFactory" />
+	   <!-- 消息转换器
+	      <property name="messageConverter" ref="objConverter"/>
+	       -->
+	   <property name="defaultDestination" ref="queueDestination" />
+	   <property name="receiveTimeout" value="10000" />
+	</bean>
+	
+	
+	<!-- 类型转换器
+	<bean id="objConverter" class="com.jeeplus.modules.jms.converter.ObjectConverter"/>
+	   -->
+     
+ </beans>

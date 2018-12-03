@@ -38,6 +38,7 @@ public class ProductController {
     	List<Product> list = productService.findAllProducts();
     	Map<String, List> map = new HashMap<>();
     	map.put("product", list);
+    	productService.sendMessage("访问首页啦。。。");
     	return new ModelAndView("index",map);
     }
 

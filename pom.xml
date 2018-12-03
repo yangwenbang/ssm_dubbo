@@ -17,7 +17,7 @@
     <!-- 集中定义依赖版本号 -->
     <properties>
         <!--jdk版本 项目编码 -->
-        <java.version>1.7</java.version>
+        <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!--  项目版本 -->
@@ -49,6 +49,9 @@
         <commons-lang3.version>3.3.2</commons-lang3.version>
         <commons-lang.version>2.6</commons-lang.version>
         <commons-codec.version>1.8</commons-codec.version>
+        
+        <fastjson.vesrion>1.2.35</fastjson.vesrion>
+        <activemq-pool.version>5.15.8</activemq-pool.version>
     </properties>
 
     <dependencyManagement>

@@ -19,6 +19,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
     
     <import resource="classpath:spring/spring-consumer.xml" />
 	<import resource="classpath:spring/spring-job.xml" />
+	<import resource="classpath:spring/spring-activemq.xml" />
 	
 	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig"></bean>
     
