@@ -57,8 +57,8 @@ public class ProcuctServiceImpl implements ProductService{
     }
 	
 	public void sendMessage(final String msg){
-		String destination = jmsTemplate.getDefaultDestinationName().toString();
-        System.out.println("Send " + msg + " to Destination " + destination);
+		Destination destination = jmsTemplate.getDefaultDestination();
+        System.out.println("Send " + msg + " to Destination " + destination.toString());
         MessageCreator messageCreator = new MessageCreator(){
             public Message createMessage(Session session) throws JMSException {
                 // TODO Auto-generated method stub
